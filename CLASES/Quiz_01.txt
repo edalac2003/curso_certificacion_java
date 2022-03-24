@@ -1,0 +1,39 @@
+Hola muchachos buenas noches,
+
+Este es el primer Quiz de repaso para que ustedes puedan ir validando sus conocimientos, de cara al examen de certificación, para los que estén pensando en tomarlo:
+
+1. ¿Cuál de los siguientes comandos es correcto? (Escoger todas las que apliquen)
+
+A. javac VertebradoClass
+B. java  VertebradoClass	X
+C. javac  Vertebrado.java	X
+D. java  Vertebrado.java
+
+2. ¿Cuál de los siguientes métodos "main", tiene la sintaxis correcta?
+
+A. Public static void main (String[ ] args) { }
+B. public Static void Main (String[ ] args) { }
+C. public static void main (String( ) args) { }
+D. public static void main (String[ ] args) { }	X
+
+3. ¿Cuáles de las siguientes declaraciones y/o inicializaciones de variable son correctas?
+
+A. int count = 5; quantity = 2;
+B. string name, label;				X
+C. boolean complete = "false";
+D. boolean complete = true;			X
+
+4. Dado que:
+
+String name = "Bob";
+String  msg;
+int num = 3;
+
+¿Cuál de las siguientes sentencias asigna el valor de "Bob wrote 3 Java programs." a la variable msg?
+
+A. msg = name + " wrote " + num " Java programs.";
+B.  msg = name + " wrote " + 3 + " Java programs.";			X
+C.  msg = name + " wrote " + (2 + 1) + " Java programs.";	X
+D. msg = name + " wrote " + 2 + 1 + " Java programs.";
+
+La idea es que lo intenten responder sin ayuda del IDE ni de la línea de comando en principio. Después de tener sus posibles respuestas, pueden validarlo con el IDE o la línea de comando para corroborar.
