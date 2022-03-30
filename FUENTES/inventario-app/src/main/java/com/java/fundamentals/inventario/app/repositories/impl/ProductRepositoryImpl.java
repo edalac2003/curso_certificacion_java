@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.java.fundamentals.inventario.app.repositories;
+package com.java.fundamentals.inventario.app.repositories.impl;
 
 import com.java.fundamentals.inventario.app.model.Product;
 
@@ -11,7 +11,7 @@ import com.java.fundamentals.inventario.app.model.Product;
  *
  * @author edala
  */
-public class ProductRepository {
+public class ProductRepositoryImpl {
     
     public Product create(Product productToCreate){
         return null;

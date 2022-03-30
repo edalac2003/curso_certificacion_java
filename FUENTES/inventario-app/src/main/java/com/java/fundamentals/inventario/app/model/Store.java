@@ -50,6 +50,11 @@ public class Store {
     public void setEmpresa(Company empresa) {
         this.empresa = empresa;
     }
+
+    @Override
+    public String toString() {
+        return "Store{" + "id=" + id + ", name=" + name + ", address=" + address + ", ciudad=" + ciudad + ", empresa=" + empresa + '}';
+    }
     
     
 }
