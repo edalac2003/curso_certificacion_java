@@ -41,7 +41,15 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     
     @Override
     public Store findById(short idStore){
-        return null;
+        Store foundStore = null;
+        for(Store storeIterate : stores){
+            if(idStore == storeIterate.getId()){
+                foundStore = storeIterate;
+                break;
+            }
+        }
+        
+        return foundStore;
     }
     
     @Override
@@ -51,7 +59,12 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     
     @Override
     public Store update(Store storeToUpdate){
-        return null;
+        Store foundStore = findById(storeToUpdate.getId());
+        foundStore.setName(storeToUpdate.getName());
+        foundStore.setAddress(storeToUpdate.getAddress());
+        foundStore.setCiudad(storeToUpdate.getCiudad());
+                
+        return storeToUpdate;
     }
     
     @Override

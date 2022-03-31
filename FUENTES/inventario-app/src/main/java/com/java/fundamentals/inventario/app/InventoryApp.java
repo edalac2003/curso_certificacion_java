@@ -29,11 +29,39 @@ public class InventoryApp {
         
         InventoryApp inventoryApp = new InventoryApp(storeService);
         
+//        if("findAllStores".equals(args[0])){
+//            inventoryApp.findAllStores();      
+//        }else if("findStoreById".equals(args[0])){
+//            inventoryApp.findStoreById();            
+//        }else{
+//            System.out.println("No se reconoció ninguna operacion");
+//        }
+        
+        inventoryApp.update();
         inventoryApp.findAllStores();
+        
     }
     
     public void findAllStores(){
         Store[] foundStores = this.storeServiceI.findAll();
-        System.out.println("Las tiendas encontradas son : " + foundStores.length);
+        for (Store foundStore : foundStores) {
+            System.out.println("Las tiendas encontradas son : " + foundStore);            
+        }        
+    }
+    
+    public void findStoreById(){
+        Store foundStore = this.storeServiceI.findById((short)2);
+        
+        System.out.println("La información de la tienda es: " + foundStore);
+    }
+    
+    public void  update(){
+        Store storeToUpdate = new Store();
+        storeToUpdate.setId((short)2);
+        storeToUpdate.setName("Nueva tienda 2");
+        storeToUpdate.setAddress("Nueva tienda 2");
+        storeToUpdate.setCiudad("Nueva tienda 2");
+        
+        this.storeServiceI.update(storeToUpdate);
     }
 }

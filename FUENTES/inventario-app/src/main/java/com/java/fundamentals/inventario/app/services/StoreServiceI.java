@@ -13,4 +13,8 @@ import com.java.fundamentals.inventario.app.model.Store;
  */
 public interface StoreServiceI {
     Store[] findAll();
+    
+    Store findById(short id);
+    
+    Store update(Store storeToUpdate);
 }

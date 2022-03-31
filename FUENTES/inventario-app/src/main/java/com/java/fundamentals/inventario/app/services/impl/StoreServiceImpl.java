@@ -26,5 +26,16 @@ public class StoreServiceImpl implements StoreServiceI{
     public Store[] findAll() {
         return storeRepository.findAll();
     }
+
+    @Override
+    public Store findById(short id) {
+        return storeRepository.findById(id);
+    }
+
+    @Override
+    public Store update(Store storeToUpdate) {
+        return storeRepository.update(storeToUpdate);
+    }
+    
     
 }
