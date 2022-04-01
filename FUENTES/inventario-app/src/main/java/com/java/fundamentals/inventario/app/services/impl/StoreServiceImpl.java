@@ -36,6 +36,11 @@ public class StoreServiceImpl implements StoreServiceI{
     public Store update(Store storeToUpdate) {
         return storeRepository.update(storeToUpdate);
     }
+
+    @Override
+    public void delete(short idStore) {
+        storeRepository.delete(idStore);
+    }
     
     
 }

@@ -17,4 +17,6 @@ public interface StoreServiceI {
     Store findById(short id);
     
     Store update(Store storeToUpdate);
+    
+    void delete(short idStore);
 }

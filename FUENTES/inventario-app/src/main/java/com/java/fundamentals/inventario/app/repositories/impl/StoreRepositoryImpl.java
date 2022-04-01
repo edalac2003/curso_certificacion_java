@@ -69,6 +69,20 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     
     @Override
     public void delete(short idStore){
+        //Buscar y eliminar el Store
+        for (int i = 0; i < stores.length; i++) {
+            if(stores[i].getId() == idStore){
+                stores[i] = null;
+                break;
+            }
+        }
         
+        //Recorrer y ordenar el array
+        for (int i = 0; i < stores.length-1; i++) {
+            if(stores[i] == null && stores[i+1] != null){
+                stores[i] = stores[i+1];
+                stores[i+1] = null;
+            }
+        }
     }
 }
