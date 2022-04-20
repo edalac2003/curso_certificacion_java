@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.java.fundamentals.inventario.app.services.impl;
 
+import com.java.fundamentals.inventario.app.exceptions.AtLeastOneStoreIsRequiredException;
+import com.java.fundamentals.inventario.app.exceptions.StoreNameTooLongException;
+import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
 import com.java.fundamentals.inventario.app.repositories.impl.StoreRepositoryImpl;
@@ -12,7 +10,7 @@ import com.java.fundamentals.inventario.app.services.StoreServiceI;
 
 /**
  *
- * @author edala
+ * @author Edwin Acosta Bravo
  */
 public class StoreServiceImpl implements StoreServiceI{
 
@@ -28,18 +26,30 @@ public class StoreServiceImpl implements StoreServiceI{
     }
 
     @Override
-    public Store findById(short id) {
+    public Store findById(short id) throws StoreNotFoundException {
         return storeRepository.findById(id);
     }
 
     @Override
-    public Store update(Store storeToUpdate) {
+    public Store update(Store storeToUpdate) throws StoreNotFoundException, StoreNameTooLongException{
+        if(storeToUpdate.getName().length() > 8){
+            throw new StoreNameTooLongException("El nombre de la tienda excede el tamaño permitido.");
+        }
         return storeRepository.update(storeToUpdate);
     }
 
     @Override
     public void delete(short idStore) {
         storeRepository.delete(idStore);
+    }
+
+    @Override
+    public void checkStores() {
+        Store[] stores = storeRepository.findAll();
+        if(stores == null || stores.length == 0){
+            throw new AtLeastOneStoreIsRequiredException(); 
+            
+        }
     }
     
     

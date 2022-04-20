@@ -1,5 +1,6 @@
 package com.java.fundamentals.inventario.app.repositories.impl;
 
+import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
 
@@ -9,29 +10,14 @@ import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
  */
 public class StoreRepositoryImpl implements StoreRepositoryI{
     
-    private Store[] stores = new Store[3];
+    private Store[] stores = {
+        new Store((short)1, "Tienda 1", "Direccion 1"),
+        new Store((short)2, "Tienda 2", "Direccion 2"),
+        new Store((short)3, "Tienda 3", "Direccion 3")
+    };
     
     public StoreRepositoryImpl(){
-        Store store1 = new Store();
-        store1.setId((short)1);
-        store1.setName("Tienda 1");
-        store1.setAddress("Direccion 1");
         
-        stores[0] = store1;
-                
-        Store store2 = new Store();
-        store2.setId((short)2);
-        store2.setName("Tienda 2");
-        store2.setAddress("Direccion 2");
-        
-        stores[1] = store2;
-        
-        Store store3 = new Store();
-        store3.setId((short)3);
-        store3.setName("Tienda 3");
-        store3.setAddress("Direccion 3");
-        
-        stores[2] = store3;        
     }
     
     @Override
@@ -40,13 +26,16 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     }
     
     @Override
-    public Store findById(short idStore){
+    public Store findById(short idStore) throws StoreNotFoundException{
         Store foundStore = null;
         for(Store storeIterate : stores){
             if(idStore == storeIterate.getId()){
                 foundStore = storeIterate;
                 break;
             }
+        }
+        if(foundStore == null){
+            throw new StoreNotFoundException("El id suministrado " + idStore + " no produjo ningún resultado.");
         }
         
         return foundStore;
@@ -58,7 +47,7 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     }
     
     @Override
-    public Store update(Store storeToUpdate){
+    public Store update(Store storeToUpdate) throws StoreNotFoundException{
         Store foundStore = findById(storeToUpdate.getId());
         foundStore.setName(storeToUpdate.getName());
         foundStore.setAddress(storeToUpdate.getAddress());

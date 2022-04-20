@@ -1,22 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.java.fundamentals.inventario.app.services;
 
+import com.java.fundamentals.inventario.app.exceptions.StoreNameTooLongException;
+import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 
 /**
  *
- * @author edala
+ * @author Edwin Acosta Bravo
  */
 public interface StoreServiceI {
     Store[] findAll();
     
-    Store findById(short id);
+    Store findById(short id) throws StoreNotFoundException;
     
-    Store update(Store storeToUpdate);
+    Store update(Store storeToUpdate) throws StoreNotFoundException, StoreNameTooLongException;
     
     void delete(short idStore);
+    
+    void checkStores();
 }

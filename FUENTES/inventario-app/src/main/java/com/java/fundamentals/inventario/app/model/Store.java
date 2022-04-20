@@ -11,6 +11,19 @@ public class Store {
     private String ciudad;
     private Company empresa;
 
+    public Store(short id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public Store(short id, String name, String address, String ciudad) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.ciudad = ciudad;
+    }
+
     public short getId() {
         return id;
     }

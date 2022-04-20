@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.java.fundamentals.inventario.app.repositories;
 
+import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 
 /**
  *
- * @author edala
+ * @author Edwin Acosta Bravo
  */
 public interface StoreRepositoryI {
     
     Store create(Store storeToCreate);
     
-    Store findById(short idStore);
+    Store findById(short idStore) throws StoreNotFoundException;
     
     Store[] findAll();
     
-    Store update(Store storeToUpdate);
+    Store update(Store storeToUpdate) throws StoreNotFoundException;
     
     void delete(short idStore);
 }

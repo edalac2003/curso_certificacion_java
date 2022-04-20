@@ -1,19 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.java.fundamentals.inventario.app;
 
+import com.java.fundamentals.inventario.app.exceptions.StoreNameTooLongException;
+import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
 import com.java.fundamentals.inventario.app.repositories.impl.StoreRepositoryImpl;
 import com.java.fundamentals.inventario.app.services.StoreServiceI;
 import com.java.fundamentals.inventario.app.services.impl.StoreServiceImpl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author edala
+ * @author Edwin Acosta Bravo
  */
 public class InventoryApp {
     
@@ -28,6 +27,8 @@ public class InventoryApp {
         StoreServiceI storeService = new StoreServiceImpl(storeRepositoryImpl);
         
         InventoryApp inventoryApp = new InventoryApp(storeService);
+        
+        storeService.checkStores();            
         
         if("findAllStores".equals(args[0])){
             inventoryApp.findAllStores();      
@@ -53,29 +54,31 @@ public class InventoryApp {
     }
     
     public void findStoreById(){
-        Store foundStore = this.storeServiceI.findById((short)2);
-        
-        System.out.println("La información de la tienda es: " + foundStore);
+        Store foundStore;
+        try {
+            foundStore = this.storeServiceI.findById((short)2);
+            System.out.println("La información de la tienda es: " + foundStore);
+        } catch (StoreNotFoundException ex) {
+            Logger.getLogger(InventoryApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void  update(){
-        Store storeToUpdate = new Store();
-        storeToUpdate.setId((short)2);
-        storeToUpdate.setName("Nueva tienda 5");
-        storeToUpdate.setAddress("direccion 2");
-        storeToUpdate.setCiudad("Nueva tienda 2");
-        
-        Store updatedStore = this.storeServiceI.update(storeToUpdate);
-        System.out.println("La tienda actualizada es: " + updatedStore);
-        
-        //Array actualizado
-        this.findAllStores();
+        try {
+            Store storeToUpdate = new Store((short)1, "Tienda", "Una Nueva direccion", "New York");                        
+            Store updatedStore = this.storeServiceI.update(storeToUpdate);
+            System.out.println("La tienda actualizada es: " + updatedStore);
+            
+        } catch (StoreNotFoundException ex) {
+            Logger.getLogger(InventoryApp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (StoreNameTooLongException ex1) {
+            Logger.getLogger(InventoryApp.class.getName()).log(Level.SEVERE, ex1.getMessage(), ex1);
+        }
     }
     
     public void delete(){
         this.storeServiceI.delete((short)3);
         
-        //Array actualizado
         this.findAllStores();
     }
 }
