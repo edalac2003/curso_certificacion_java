@@ -11,24 +11,24 @@ package com.edalac.intro;
  */
 public class Intro {
     public static void main(String[] args) {
-//        System.out.println("Hola Mundo");
-//        for(int i=0; i<=10; i++){
-//            System.out.println("Contador: " + i);
-//        }
+        testASwitch();
+
+    }
+    
+    public static void testASwitch(){
+        int a = 8;
         
-        int i, j, resultado;
-//        i = 0;
-//        j = 5;
-//        j = ++i + j++ + i++;
-//        resultado = j++ + j + i++;
+        try{
+            throw new NullPointerException();
+        }catch(NullPointerException e){
+            a = (short)1;
+        }
         
-        i = 10;
-        j = 0;
-        i = j++ + j++;
-        resultado = i++ + j++/++j + i;
-        
-        System.out.println("i " + i);
-        System.out.println("j " + j);
-        System.out.println("resultado " + resultado);
+        switch(a){
+            default: System.out.print("Saludos ");
+            case 1: System.out.print("Hola ");
+            case 2: System.out.print("Mundo ");
+                
+        }
     }
 }

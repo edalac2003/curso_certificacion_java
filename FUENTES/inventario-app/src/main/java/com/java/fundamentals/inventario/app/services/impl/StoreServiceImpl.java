@@ -7,6 +7,7 @@ import com.java.fundamentals.inventario.app.model.Store;
 import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
 import com.java.fundamentals.inventario.app.repositories.impl.StoreRepositoryImpl;
 import com.java.fundamentals.inventario.app.services.StoreServiceI;
+import java.util.List;
 
 /**
  *
@@ -19,9 +20,9 @@ public class StoreServiceImpl implements StoreServiceI{
     public StoreServiceImpl(StoreRepositoryI storeRepositoryImpl) {
         this.storeRepository = storeRepositoryImpl;
     }
-    
+
     @Override
-    public Store[] findAll() {
+    public List<Store> findAll() {
         return storeRepository.findAll();
     }
 
@@ -45,8 +46,8 @@ public class StoreServiceImpl implements StoreServiceI{
 
     @Override
     public void checkStores() {
-        Store[] stores = storeRepository.findAll();
-        if(stores == null || stores.length == 0){
+        var stores = storeRepository.findAll();
+        if(stores == null || stores.size() == 0){
             throw new AtLeastOneStoreIsRequiredException(); 
             
         }

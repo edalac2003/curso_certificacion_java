@@ -2,6 +2,7 @@ package com.java.fundamentals.inventario.app.repositories;
 
 import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,7 @@ public interface StoreRepositoryI {
     
     Store findById(short idStore) throws StoreNotFoundException;
     
-    Store[] findAll();
+    List<Store> findAll();
     
     Store update(Store storeToUpdate) throws StoreNotFoundException;
     

@@ -7,6 +7,8 @@ import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
 import com.java.fundamentals.inventario.app.repositories.impl.StoreRepositoryImpl;
 import com.java.fundamentals.inventario.app.services.StoreServiceI;
 import com.java.fundamentals.inventario.app.services.impl.StoreServiceImpl;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,30 +25,35 @@ public class InventoryApp {
     }
     
     public static void main(String[] args) {
-        StoreRepositoryI storeRepositoryImpl = new StoreRepositoryImpl();
-        StoreServiceI storeService = new StoreServiceImpl(storeRepositoryImpl);
+        var storeRepositoryImpl = new StoreRepositoryImpl();
+        var storeService = new StoreServiceImpl(storeRepositoryImpl);
         
-        InventoryApp inventoryApp = new InventoryApp(storeService);
+        var inventoryApp = new InventoryApp(storeService);
         
         storeService.checkStores();            
-        
-        if("findAllStores".equals(args[0])){
-            inventoryApp.findAllStores();      
-        }else if("findStoreById".equals(args[0])){
-            inventoryApp.findStoreById();            
-        }else if("update".equals(args[0])){
-            inventoryApp.update();
-        }else if("delete".equals(args[0])){
-            inventoryApp.delete();
-        }else{
-            System.out.println("No se reconoció ninguna operacion");
-        }
-                
+        switch(args[0]){
+            default:
+                System.out.println("No se reconoció ninguna operacion");
+                break;
+            case "findAllStores":
+                inventoryApp.findAllStores(); 
+                break;
+            case "findStoreById":
+                inventoryApp.findStoreById();
+                break;
+            case "update":
+                inventoryApp.update();
+                break;
+            case "delete":
+                inventoryApp.delete();
+                break;
+        }               
     }
     
     public void findAllStores(){
-        Store[] foundStores = this.storeServiceI.findAll();
-        for (Store foundStore : foundStores) {
+        List<Store> foundStores = this.storeServiceI.findAll();
+                
+        for(Store foundStore: foundStores) {
             if(foundStore != null){
                 System.out.println("Las tiendas encontradas son : " + foundStore);            
             }
@@ -65,8 +72,8 @@ public class InventoryApp {
     
     public void  update(){
         try {
-            Store storeToUpdate = new Store((short)1, "Tienda", "Una Nueva direccion", "New York");                        
-            Store updatedStore = this.storeServiceI.update(storeToUpdate);
+            var storeToUpdate = new Store((short)1, "Tienda", "Una Nueva direccion", "New York");                        
+            var updatedStore = this.storeServiceI.update(storeToUpdate);
             System.out.println("La tienda actualizada es: " + updatedStore);
             
         } catch (StoreNotFoundException ex) {

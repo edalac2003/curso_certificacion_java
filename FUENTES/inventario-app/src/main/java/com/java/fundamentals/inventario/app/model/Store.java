@@ -68,6 +68,26 @@ public class Store {
     public String toString() {
         return "Store{" + "id=" + id + ", name=" + name + ", address=" + address + ", ciudad=" + ciudad + ", empresa=" + empresa + '}';
     }
+
     
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        final Store other = (Store) obj;
+        if (obj instanceof Store){
+            if (this.id != other.id) {
+                return false;
+            }         
+        }
+        return true;
+    }
 }

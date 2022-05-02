@@ -3,21 +3,23 @@ package com.java.fundamentals.inventario.app.repositories.impl;
 import com.java.fundamentals.inventario.app.exceptions.StoreNotFoundException;
 import com.java.fundamentals.inventario.app.model.Store;
 import com.java.fundamentals.inventario.app.repositories.StoreRepositoryI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author edala
  */
 public class StoreRepositoryImpl implements StoreRepositoryI{
+        
+    private List<Store> stores = new ArrayList<>();
     
-    private Store[] stores = {
-        new Store((short)1, "Tienda 1", "Direccion 1"),
-        new Store((short)2, "Tienda 2", "Direccion 2"),
-        new Store((short)3, "Tienda 3", "Direccion 3")
-    };
+    
     
     public StoreRepositoryImpl(){
-        
+        stores.add(new Store((short)1, "Tienda 1", "Direccion 1"));
+        stores.add(new Store((short)2, "Tienda 2", "Direccion 2"));
+        stores.add( new Store((short)3, "Tienda 3", "Direccion 3"));
     }
     
     @Override
@@ -28,27 +30,29 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     @Override
     public Store findById(short idStore) throws StoreNotFoundException{
         Store foundStore = null;
-        for(Store storeIterate : stores){
-            if(idStore == storeIterate.getId()){
-                foundStore = storeIterate;
-                break;
+        if(stores.contains(new Store(idStore, "", ""))){
+            System.out.println("Encontrado");
+            for(Store storeIterate : stores){
+                if(idStore == storeIterate.getId()){
+                    foundStore = storeIterate;
+                    break;
+                }
             }
-        }
-        if(foundStore == null){
-            throw new StoreNotFoundException("El id suministrado " + idStore + " no produjo ningún resultado.");
-        }
-        
+            if(foundStore == null){
+                throw new StoreNotFoundException("El id suministrado " + idStore + " no produjo ningún resultado.");
+            }
+        }        
         return foundStore;
     }
     
     @Override
-    public Store[] findAll(){
+    public List findAll(){
         return stores;
     }
     
     @Override
     public Store update(Store storeToUpdate) throws StoreNotFoundException{
-        Store foundStore = findById(storeToUpdate.getId());
+        var foundStore = findById(storeToUpdate.getId());
         foundStore.setName(storeToUpdate.getName());
         foundStore.setAddress(storeToUpdate.getAddress());
         foundStore.setCiudad(storeToUpdate.getCiudad());
@@ -59,19 +63,19 @@ public class StoreRepositoryImpl implements StoreRepositoryI{
     @Override
     public void delete(short idStore){
         //Buscar y eliminar el Store
-        for (int i = 0; i < stores.length; i++) {
-            if(stores[i].getId() == idStore){
-                stores[i] = null;
-                break;
-            }
-        }
-        
-        //Recorrer y ordenar el array
-        for (int i = 0; i < stores.length-1; i++) {
-            if(stores[i] == null && stores[i+1] != null){
-                stores[i] = stores[i+1];
-                stores[i+1] = null;
-            }
-        }
+//        for (int i = 0; i < stores.length; i++) {
+//            if(stores[i].getId() == idStore){
+//                stores[i] = null;
+//                break;
+//            }
+//        }
+//        
+//        //Recorrer y ordenar el array
+//        for (int i = 0; i < stores.length-1; i++) {
+//            if(stores[i] == null && stores[i+1] != null){
+//                stores[i] = stores[i+1];
+//                stores[i+1] = null;
+//            }
+//        }
     }
 }
